@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Loans</title>
+    <style>
+        /* Basic Styling */
+        body {
+            background-color: #1e1e1e;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* App Bar */
+        .app-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #8d8d8d;
+            padding: 10px 20px;
+        }
+
+        .app-bar .logo {
+            width: 120px;
+        }
+
+        .app-bar .icon-button {
+            background: none;
+            border: none;
+            color: black;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .content {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Card Styling */
+        .crypto-loans-card {
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .crypto-loans-card img.icon {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .crypto-loans-card h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0 10px;
+            color: #fff;
+        }
+
+        .crypto-loans-card p {
+            font-size: 16px;
+            color: #bfbfbf;
+            padding: 0 10px;
+        }
+
+        /* Table Image */
+        .table-image {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        /* Button */
+        .borrow-button {
+            background-color: #FF8C00;
+            border: none;
+            padding: 15px 40px;
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- App Bar -->
+<header class="app-bar">
+    <div class="title">
+        <img src="assets/logo.png" alt="Logo" class="logo" onerror="this.src='error_icon.png'">
+    </div>
+    <div class="actions">
+        <button class="icon-button" onclick="searchAction()">🔍</button>
+        <button class="icon-button" onclick="menuAction()">☰</button>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="content">
+    <div class="crypto-loans-card">
+        <!-- Top Icon and Title -->
+        <img src="assets/icons/childtrade.png" alt="Crypto Loans Icon" class="icon" onerror="this.src='error_icon.png'">
+        <h1>Crypto Loans</h1>
+        <p>Borrow one type of crypto asset using another one as collateral. The borrowed assets can be traded on
+            Coinbank Spot and Derivatives markets, used on Earn and other platforms, or withdrawn.</p>
+        
+        <!-- Table Image -->
+        <img src="assets/icons/table.png" alt="Table" class="table-image" onerror="this.src='error_icon.png'">
+        
+        <!-- Borrow Now Button -->
+        <button class="borrow-button" onclick="borrowNow()">Borrow Now</button>
+    </div>
+</main>
+
+<script>
+    function searchAction() {
+        console.log("Search button clicked");
+        // Add search functionality here
+    }
+
+    function menuAction() {
+        window.location.href = 'menu.html';
+        // Add menu navigation functionality here
+    }
+
+    function borrowNow() {
+        console.log("Borrow Now button pressed");
+        // Add borrow functionality here
+    }
+</script>
+
+</body>
+</html>

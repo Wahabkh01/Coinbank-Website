@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha384-DyZ88mC6Up2uqS0ImDB4c0hfO6vGquShj8PbWofj50YZPcKGk9W2iEsv9n5JxtiY" crossorigin="anonymous">
+
+    <title>Bot</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        .app-bar {
+            display: flex;
+            align-items: center;
+            background-color: #9e9e9e;
+            padding: 10px 20px;
+            color: black;
+            justify-content: space-between;
+        }
+
+        .logo {
+            width: 120px;
+            margin-right: auto;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+
+
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .icon-button .material-icons {
+            font-size: 24px;
+            color: black;
+        }
+        .menu-buttons {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px;
+        }
+        .menu-button {
+            padding: 30px 120px 20px;
+            font-size: 18px;
+            background-color: transparent;
+            border: none;
+            color: black;
+            cursor: pointer;
+            margin: 0 10px;
+            position: relative;
+            text-align: center;
+            outline: none;
+        }
+        .menu-button.active {
+            color: #F7A600;
+        }
+        .menu-button.active::after {
+            content: '';
+            display: block;
+            height: 3px;
+            width: 40px;
+            background-color: #FFD700;
+            margin-top: 5px;
+        }
+
+        /* Container with Layered Bot Image */
+        .bot-container {
+            width: 100%;
+            background-color: #3e2723; /* brown[900] */
+            padding: 20px 16px;
+            height: 180px;
+            position: relative;
+            color: white;
+        }
+
+        .bot-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .bot-info h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .bot-info h2.bot-text {
+            color: #F7A600; /* Orange color */
+        }
+
+        .bot-info p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7); /* white70 */
+            margin: 8px 0 0;
+        }
+
+        .bot-image {
+            position: absolute;
+            bottom: 1px;
+            right: 1px;
+            width: 220px;
+            height: 120px;
+        }
+
+        /* Update Container */
+        .update-container {
+            padding: 12px 16px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .update-text {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #333; /* black87 */
+        }
+
+        .update-text .icon {
+            color: #1e88e5; /* blueAccent */
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .update-arrow {
+            color: #1e88e5; /* blueAccent */
+            font-size: 16px;
+        }
+
+
+        /* Main Container */
+        .create-bot-container {
+            padding: 20px 0;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Title */
+        .create-bot-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333; /* black87 */
+            margin: 0 16px;
+        }
+
+        /* Grid Container */
+        .bot-options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 100px;
+            padding: 20px 16px;
+        }
+
+        /* Bot Option */
+        .bot-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            font-size: 14px;
+            color: #333; /* black87 */
+        }
+
+        /* Circle Avatar for Icons */
+        .bot-option-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+        }
+
+        /* Icon Colors */
+        .orange-icon { background-color: rgba(255, 165, 0, 0.1); color: #FFA500; } /* Orange */
+        .purple-icon { background-color: rgba(128, 0, 128, 0.1); color: #800080; } /* Purple */
+        .green-icon { background-color: rgba(0, 128, 0, 0.1); color: #008000; } /* Green */
+        .blue-icon { background-color: rgba(0, 0, 255, 0.1); color: #0000FF; } /* Blue */
+        .red-icon { background-color: rgba(255, 0, 0, 0.1); color: #FF0000; } /* Red */
+
+
+
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="app-bar">
+        <img src="assets/logo.png" alt="Logo" class="logo"
+            onerror="this.style.display='none'; document.getElementById('error-icon').style.display='inline';">
+        <i id="error-icon" class="material-icons" style="display: none;">error</i>
+
+        <div class="actions">
+            <button class="icon-button" onclick="handleSearch()">
+                <span class="material-icons">search</span>
+            </button>
+            <button class="icon-button" onclick="navigateToMenu()">
+                <span class="material-icons">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Container with Layered Bot Image -->
+<div class="bot-container">
+    <div class="bot-info">
+        <h2>Coinbank Trading</h2>
+        <h2 class="bot-text">Bot</h2>
+        <p>Smart Trades Made Easy</p>
+    </div>
+    <img src="assets/botImage.png" alt="Bot Image" class="bot-image" onerror="this.src='error_icon.png'">
+</div>
+
+<!-- Update Container -->
+<div class="update-container">
+    <div class="update-text">
+        <span class="icon">📣</span> <!-- Campaign Icon -->
+        <span>Update on Tick Sizes for Spot Pairs (Sep 29, 2024)</span>
+    </div>
+    <span class="update-arrow">➡️</span> <!-- Arrow Icon -->
+</div>
+
+
+<!-- Main Container -->
+<div class="create-bot-container">
+    <h2 class="create-bot-title">Create Bot</h2>
+
+    <!-- Bot Options Grid -->
+    <div class="bot-options-grid">
+        <div class="bot-option">
+            <div class="bot-option-icon orange-icon">📊</div>
+            <div>Future Grid</div>
+        </div>
+        <div class="bot-option">
+            <div class="bot-option-icon purple-icon">📈</div>
+            <div>Future Martingale</div>
+        </div>
+        <div class="bot-option">
+            <div class="bot-option-icon green-icon">🔄</div>
+            <div>Futures Combo</div>
+        </div>
+        <div class="bot-option">
+            <div class="bot-option-icon blue-icon">📉</div>
+            <div>Spot Grid</div>
+        </div>
+        <div class="bot-option">
+            <div class="bot-option-icon red-icon">🔄</div>
+            <div>DCA</div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Hourly Top Picks Section -->
+<div style="padding: 16px;">
+    <h2 style="font-size: 20px; font-weight: bold; color: black;">Hourly Top Picks</h2>
+    <div style="margin-top: 10px; padding: 0 16px;">
+      <div style="display: flex; gap: 80px; flex-wrap: wrap;">
+        <span>Fusion Rankings</span>
+        <span>Future Grid</span>
+        <span>Future Martingale</span>
+        <span>Spot Grid</span>
+      </div>
+    </div>
+    <div style="margin-top: 16px; padding: 16px; background-color: white; border-radius: 10px; box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);">
+      <!-- Trophy Icon and Remaining Days Row -->
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <i class="fas fa-trophy" style="color: amber; font-size: 20px;"></i>
+        <span style="font-size: 12px; color: grey;">Running Time: 230D 5h 3m</span>
+      </div>
+      <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+        <!-- BTC/USDT Section -->
+        <div style="display: flex; align-items: center;">
+          <img src="assets/icons/btc.png" alt="BTC Icon" width="40" height="40">
+          <div style="margin-left: 8px;">
+            <p style="font-size: 16px; font-weight: bold; color: black;">BTC/USDT</p>
+            <p style="font-size: 14px; color: grey;">Spot Grid</p>
+          </div>
+        </div>
+        <!-- Copy for Free Button -->
+        <button style="background-color: orange; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: bold; color: black;">
+          Copy for Free
+        </button>
+      </div>
+      <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+        <!-- ROI Column -->
+        <div style="text-align: left;">
+          <p style="font-size: 14px; color: grey;">ROI</p>
+          <p style="font-size: 16px; font-weight: bold; color: green;">86.04%</p>
+        </div>
+        <!-- P&L USD Column -->
+        <div style="text-align: center;">
+          <p style="font-size: 14px; color: grey;">P&L (USD)</p>
+          <p style="font-size: 16px; font-weight: bold; color: black;">210.95</p>
+        </div>
+        <!-- Copiers Column -->
+        <div style="text-align: right;">
+          <p style="font-size: 14px; color: grey;">Copiers</p>
+          <p style="font-size: 16px; font-weight: bold; color: black;">2,192</p>
+        </div>
+      </div>
+    </div>
+    <!-- Additional Container for Repeated Content -->
+    <div style="margin-top: 16px; padding: 16px; background-color: white; border-radius: 10px; box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);">
+        <!-- Trophy Icon and Remaining Days Row -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <i class="fas fa-trophy" style="color: amber; font-size: 20px;"></i>
+          <span style="font-size: 12px; color: grey;">Running Time: 230D 5h 3m</span>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <!-- BTC/USDT Section -->
+          <div style="display: flex; align-items: center;">
+            <img src="assets/icons/btc.png" alt="BTC Icon" width="40" height="40">
+            <div style="margin-left: 8px;">
+              <p style="font-size: 16px; font-weight: bold; color: black;">BTC/USDT</p>
+              <p style="font-size: 14px; color: grey;">Spot Grid</p>
+            </div>
+          </div>
+          <!-- Copy for Free Button -->
+          <button style="background-color: orange; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: bold; color: black;">
+            Copy for Free
+          </button>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+          <!-- ROI Column -->
+          <div style="text-align: left;">
+            <p style="font-size: 14px; color: grey;">ROI</p>
+            <p style="font-size: 16px; font-weight: bold; color: green;">86.04%</p>
+          </div>
+          <!-- P&L USD Column -->
+          <div style="text-align: center;">
+            <p style="font-size: 14px; color: grey;">P&L (USD)</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">210.95</p>
+          </div>
+          <!-- Copiers Column -->
+          <div style="text-align: right;">
+            <p style="font-size: 14px; color: grey;">Copiers</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">2,192</p>
+          </div>
+        </div>
+      </div>
+      <!-- Additional Container for Repeated Content -->
+      <div style="margin-top: 16px; padding: 16px; background-color: white; border-radius: 10px; box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);">
+        <!-- Trophy Icon and Remaining Days Row -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <i class="fas fa-trophy" style="color: amber; font-size: 20px;"></i>
+          <span style="font-size: 12px; color: grey;">Running Time: 230D 5h 3m</span>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <!-- BTC/USDT Section -->
+          <div style="display: flex; align-items: center;">
+            <img src="assets/icons/btc.png" alt="BTC Icon" width="40" height="40">
+            <div style="margin-left: 8px;">
+              <p style="font-size: 16px; font-weight: bold; color: black;">BTC/USDT</p>
+              <p style="font-size: 14px; color: grey;">Spot Grid</p>
+            </div>
+          </div>
+          <!-- Copy for Free Button -->
+          <button style="background-color: orange; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: bold; color: black;">
+            Copy for Free
+          </button>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+          <!-- ROI Column -->
+          <div style="text-align: left;">
+            <p style="font-size: 14px; color: grey;">ROI</p>
+            <p style="font-size: 16px; font-weight: bold; color: green;">86.04%</p>
+          </div>
+          <!-- P&L USD Column -->
+          <div style="text-align: center;">
+            <p style="font-size: 14px; color: grey;">P&L (USD)</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">210.95</p>
+          </div>
+          <!-- Copiers Column -->
+          <div style="text-align: right;">
+            <p style="font-size: 14px; color: grey;">Copiers</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">2,192</p>
+          </div>
+        </div>
+      </div>
+      <!-- Additional Container for Repeated Content -->
+      <div style="margin-top: 16px; padding: 16px; background-color: white; border-radius: 10px; box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);">
+        <!-- Trophy Icon and Remaining Days Row -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <i class="fas fa-trophy" style="color: amber; font-size: 20px;"></i>
+          <span style="font-size: 12px; color: grey;">Running Time: 230D 5h 3m</span>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <!-- BTC/USDT Section -->
+          <div style="display: flex; align-items: center;">
+            <img src="assets/icons/btc.png" alt="BTC Icon" width="40" height="40">
+            <div style="margin-left: 8px;">
+              <p style="font-size: 16px; font-weight: bold; color: black;">BTC/USDT</p>
+              <p style="font-size: 14px; color: grey;">Spot Grid</p>
+            </div>
+          </div>
+          <!-- Copy for Free Button -->
+          <button style="background-color: orange; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: bold; color: black;">
+            Copy for Free
+          </button>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+          <!-- ROI Column -->
+          <div style="text-align: left;">
+            <p style="font-size: 14px; color: grey;">ROI</p>
+            <p style="font-size: 16px; font-weight: bold; color: green;">86.04%</p>
+          </div>
+          <!-- P&L USD Column -->
+          <div style="text-align: center;">
+            <p style="font-size: 14px; color: grey;">P&L (USD)</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">210.95</p>
+          </div>
+          <!-- Copiers Column -->
+          <div style="text-align: right;">
+            <p style="font-size: 14px; color: grey;">Copiers</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">2,192</p>
+          </div>
+        </div>
+      </div>
+      <!-- Additional Container for Repeated Content -->
+      <div style="margin-top: 16px; padding: 16px; background-color: white; border-radius: 10px; box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);">
+        <!-- Trophy Icon and Remaining Days Row -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <i class="fas fa-trophy" style="color: amber; font-size: 20px;"></i>
+          <span style="font-size: 12px; color: grey;">Running Time: 230D 5h 3m</span>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <!-- BTC/USDT Section -->
+          <div style="display: flex; align-items: center;">
+            <img src="assets/icons/btc.png" alt="BTC Icon" width="40" height="40">
+            <div style="margin-left: 8px;">
+              <p style="font-size: 16px; font-weight: bold; color: black;">BTC/USDT</p>
+              <p style="font-size: 14px; color: grey;">Spot Grid</p>
+            </div>
+          </div>
+          <!-- Copy for Free Button -->
+          <button style="background-color: orange; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: bold; color: black;">
+            Copy for Free
+          </button>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+          <!-- ROI Column -->
+          <div style="text-align: left;">
+            <p style="font-size: 14px; color: grey;">ROI</p>
+            <p style="font-size: 16px; font-weight: bold; color: green;">86.04%</p>
+          </div>
+          <!-- P&L USD Column -->
+          <div style="text-align: center;">
+            <p style="font-size: 14px; color: grey;">P&L (USD)</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">210.95</p>
+          </div>
+          <!-- Copiers Column -->
+          <div style="text-align: right;">
+            <p style="font-size: 14px; color: grey;">Copiers</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">2,192</p>
+          </div>
+        </div>
+      </div>
+      <!-- Additional Container for Repeated Content -->
+      <div style="margin-top: 16px; padding: 16px; background-color: white; border-radius: 10px; box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);">
+        <!-- Trophy Icon and Remaining Days Row -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <i class="fas fa-trophy" style="color: amber; font-size: 20px;"></i>
+          <span style="font-size: 12px; color: grey;">Running Time: 230D 5h 3m</span>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <!-- BTC/USDT Section -->
+          <div style="display: flex; align-items: center;">
+            <img src="assets/icons/btc.png" alt="BTC Icon" width="40" height="40">
+            <div style="margin-left: 8px;">
+              <p style="font-size: 16px; font-weight: bold; color: black;">BTC/USDT</p>
+              <p style="font-size: 14px; color: grey;">Spot Grid</p>
+            </div>
+          </div>
+          <!-- Copy for Free Button -->
+          <button style="background-color: orange; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: bold; color: black;">
+            Copy for Free
+          </button>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+          <!-- ROI Column -->
+          <div style="text-align: left;">
+            <p style="font-size: 14px; color: grey;">ROI</p>
+            <p style="font-size: 16px; font-weight: bold; color: green;">86.04%</p>
+          </div>
+          <!-- P&L USD Column -->
+          <div style="text-align: center;">
+            <p style="font-size: 14px; color: grey;">P&L (USD)</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">210.95</p>
+          </div>
+          <!-- Copiers Column -->
+          <div style="text-align: right;">
+            <p style="font-size: 14px; color: grey;">Copiers</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">2,192</p>
+          </div>
+        </div>
+      </div>
+      <!-- Additional Container for Repeated Content -->
+      <div style="margin-top: 16px; padding: 16px; background-color: white; border-radius: 10px; box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);">
+        <!-- Trophy Icon and Remaining Days Row -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <i class="fas fa-trophy" style="color: amber; font-size: 20px;"></i>
+          <span style="font-size: 12px; color: grey;">Running Time: 230D 5h 3m</span>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <!-- BTC/USDT Section -->
+          <div style="display: flex; align-items: center;">
+            <img src="assets/icons/btc.png" alt="BTC Icon" width="40" height="40">
+            <div style="margin-left: 8px;">
+              <p style="font-size: 16px; font-weight: bold; color: black;">BTC/USDT</p>
+              <p style="font-size: 14px; color: grey;">Spot Grid</p>
+            </div>
+          </div>
+          <!-- Copy for Free Button -->
+          <button style="background-color: orange; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: bold; color: black;">
+            Copy for Free
+          </button>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+          <!-- ROI Column -->
+          <div style="text-align: left;">
+            <p style="font-size: 14px; color: grey;">ROI</p>
+            <p style="font-size: 16px; font-weight: bold; color: green;">86.04%</p>
+          </div>
+          <!-- P&L USD Column -->
+          <div style="text-align: center;">
+            <p style="font-size: 14px; color: grey;">P&L (USD)</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">210.95</p>
+          </div>
+          <!-- Copiers Column -->
+          <div style="text-align: right;">
+            <p style="font-size: 14px; color: grey;">Copiers</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">2,192</p>
+          </div>
+        </div>
+      </div>
+      <!-- Additional Container for Repeated Content -->
+      <div style="margin-top: 16px; padding: 16px; background-color: white; border-radius: 10px; box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);">
+        <!-- Trophy Icon and Remaining Days Row -->
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <i class="fas fa-trophy" style="color: amber; font-size: 20px;"></i>
+          <span style="font-size: 12px; color: grey;">Running Time: 230D 5h 3m</span>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <!-- BTC/USDT Section -->
+          <div style="display: flex; align-items: center;">
+            <img src="assets/icons/btc.png" alt="BTC Icon" width="40" height="40">
+            <div style="margin-left: 8px;">
+              <p style="font-size: 16px; font-weight: bold; color: black;">BTC/USDT</p>
+              <p style="font-size: 14px; color: grey;">Spot Grid</p>
+            </div>
+          </div>
+          <!-- Copy for Free Button -->
+          <button style="background-color: orange; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: bold; color: black;">
+            Copy for Free
+          </button>
+        </div>
+        <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+          <!-- ROI Column -->
+          <div style="text-align: left;">
+            <p style="font-size: 14px; color: grey;">ROI</p>
+            <p style="font-size: 16px; font-weight: bold; color: green;">86.04%</p>
+          </div>
+          <!-- P&L USD Column -->
+          <div style="text-align: center;">
+            <p style="font-size: 14px; color: grey;">P&L (USD)</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">210.95</p>
+          </div>
+          <!-- Copiers Column -->
+          <div style="text-align: right;">
+            <p style="font-size: 14px; color: grey;">Copiers</p>
+            <p style="font-size: 16px; font-weight: bold; color: black;">2,192</p>
+          </div>
+        </div>
+      </div>
+      <!-- Additional Container for Repeated Content -->
+    
+  </div>
+  
+
+
+    <script>
+        function searchAction() {
+            alert('Search button clicked');
+        }
+        
+        function navigateToMenu() {
+            window.location.href = 'menu.html'; // Redirect to the menu page
+        }
+
+    </script>
+</body>
+</html>

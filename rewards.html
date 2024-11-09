@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rewards Hub</title>
+<style>
+  /* Global Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #212121;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app-bar {
+    width: 100%;
+    background-color: #757575;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+  }
+
+  .app-bar img {
+    width: 120px;
+  }
+
+  .app-bar .icon {
+    color: #000000;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 15px;
+  }
+
+  .content {
+    text-align: center;
+    max-width: 500px;
+  }
+
+  .title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 20px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-top: 10px;
+  }
+
+  .reward-image {
+    width: 250px;
+    height: 250px;
+    margin-top: 20px;
+  }
+
+  .amount {
+    font-size: 32px;
+    font-weight: 700;
+    color: #FFA500;
+    margin-top: 10px;
+  }
+
+  .reward-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
+    margin-top: 5px;
+  }
+
+  .button {
+    background-color: #FFA500;
+    color: #ffffff;
+    padding: 15px 50px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 90px;
+  }
+
+  .button:hover {
+    background-color: #ff8800;
+  }
+</style>
+</head>
+<body>
+
+<!-- App Bar -->
+<div class="app-bar">
+  <img src="assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+  <div class="icons">
+    <span class="icon">🔍</span>
+    <span class="icon" onclick="window.location.href='menu.html'">☰</span>
+  </div>
+</div>
+
+<!-- Content Section -->
+<div class="content">
+  <div class="title">Rewards Hub</div>
+  <div class="subtitle">New user can get welcome gifts worth up to $5020</div>
+  <img src="assets/icons/btcGift.png" alt="Reward Image" class="reward-image">
+  <div class="amount">$5020</div>
+  <div class="reward-text">Welcome gift</div>
+  <button class="button">Google Play</button>
+</div>
+
+</body>
+</html>

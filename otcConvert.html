@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTC Convert</title>
+  <style>
+    /* Basic Styling */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* AppBar */
+    .app-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #8d8d8d;
+        padding: 10px 20px;
+        color: black;
+    }
+
+    .title .logo {
+        width: 120px;
+    }
+
+    .icon-button {
+        background: none;
+        border: none;
+        color: black;
+        font-size: 24px;
+    }
+
+    /* Main Top Section */
+    .top-container {
+        text-align: left;
+        padding: 20px;
+        background: linear-gradient(180.18deg, rgba(201, 55, 55, 0.4) -194.67%, #111111 36.15%);
+        color: white;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .top-container h1 {
+        font-size: 58px;
+        color: #FF8C00;
+        margin: 80px 700px;
+    }
+
+    .top-container p {
+        flex-grow: 4;
+        margin: 75px 700px;
+    }
+
+    .button-row {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: auto; /* Pushes buttons towards the bottom */
+    }
+
+    .convert-button, .otc-button {
+        padding: 20px;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .convert-button {
+        background-color: white;
+        color: black;
+        width: 20%;
+        padding-top: 20px;
+    }
+
+    .otc-button {
+        background-color: #4d4d4d;
+        color: #bfbfbf;
+        width: 20%;
+    }
+
+    /* Conversion Section */
+    .conversion-section {
+        padding: 20px;
+        background-color: white;
+    }
+
+    .conversion-box {
+        padding: 16px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+    }
+
+    .conversion-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .divider {
+        text-align: center;
+        font-size: 24px;
+        color: #999;
+        margin: 20px 0;
+    }
+
+    .transaction-info {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 16px;
+    }
+
+    .no-fee {
+        color: green;
+    }
+
+    .login-button {
+        width: 40%;
+        padding: 14px;
+        background-color: #FFA500;
+        color: black;
+        font-weight: bold;
+        border-radius: 8px;
+        border: none;
+        margin-top: 16px;
+        margin-left: 30%;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+        padding: 20px;
+        background-color: white;
+        display: block;
+        align-items: center;
+    }
+
+
+    .faq-section h2 {
+        font-size: 26px;
+        font-weight: 600;
+    }
+
+    .faq-item {
+        font-size: 18px;
+        font-weight: 800;
+        margin: 20px 0;
+    }
+
+    .view-more {
+        font-size: 18px;
+        font-weight: 900;
+        color: #F7A600;
+        margin-top: 40px;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 20px;
+        text-align: center;
+        background-color: #fff;
+        color: grey;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: space-evenly;
+        margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+    <!-- AppBar -->
+    <header class="app-bar">
+        <div class="title">
+            <img src="assets/logo.png" alt="Logo" onerror="this.src='error_icon.png'" class="logo">
+        </div>
+        <div class="actions">
+            <button class="icon-button" onclick="searchAction()"><i class="search-icon">🔍</i></button>
+            <button class="icon-button" onclick="menuAction()">☰</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Top Section with Heading and Buttons -->
+        <section class="top-container">
+            <h1>Convert &<br> OTC Trading</h1>
+            <p>Offers seamless fiat to crypto Conversions</p>
+            <div class="button-row">
+                <button class="convert-button">Convert</button>
+                <button class="otc-button" onclick="window.location.href='otcTrade.html'">OTC Trading</button>
+            </div>
+        </section>
+
+        <!-- Conversion Form Section -->
+        <section class="conversion-section">
+            <div class="conversion-box">
+                <div class="conversion-row">
+                    <div>
+                        <span>From</span>
+                        <strong>---</strong>
+                    </div>
+                    <div>
+                        <span>Available :-</span>
+                        <strong>All</strong>
+                    </div>
+                </div>
+                <div class="divider">↓</div>
+                <div class="conversion-row">
+                    <div>
+                        <span>To</span>
+                        <strong>---</strong>
+                    </div>
+                    <strong>---</strong>
+                </div>
+            </div>
+
+            <!-- Transaction Info -->
+            <div class="transaction-info">
+                <div>
+                    <span>Transaction Fee</span>
+                    <strong class="no-fee">0 fee</strong>
+                </div>
+                <div>
+                    <span>Receivable</span>
+                    <strong>---</strong>
+                </div>
+            </div>
+
+            <!-- Login/Signup Button -->
+            <button class="login-button">Log In/Sign Up</button>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>FAQs</h2>
+            <div class="faq-item">How to Buy Coins with Your Credit/Debit Card on Coinbank</div>
+            <div class="faq-item">How to Buy Coins with Your Credit/Debit Card on Coinbank</div>
+            <div class="faq-item">How to Buy Coins with Your Credit/Debit Card on Coinbank</div>
+            <div class="faq-item">How to Buy Coins with Your Credit/Debit Card on Coinbank</div>
+            <div class="faq-item">How to Buy Coins with Your Credit/Debit Card on Coinbank</div>
+            <div class="view-more">View More</div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-links">
+                <span>Market Overview</span>
+                <span>Trading Fee</span>
+                <span>API</span>
+                <span>Help Center</span>
+            </div>
+            <p>© 2024-2030 Coinbank.com. All rights reserved</p>
+        </footer>
+    </main>
+
+    <script>
+        function searchAction() {
+            console.log("Search button clicked");
+        }
+
+        function menuAction() {
+            window.location.href = 'menu.html';
+        }
+    </script>
+</body>
+</html>

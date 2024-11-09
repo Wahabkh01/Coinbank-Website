@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha384-DyZ88mC6Up2uqS0ImDB4c0hfO6vGquShj8PbWofj50YZPcKGk9W2iEsv9n5JxtiY" crossorigin="anonymous">
+
+    <title>P2P Sell</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        .app-bar {
+            display: flex;
+            align-items: center;
+            background-color: #9e9e9e;
+            padding: 10px 20px;
+            color: black;
+            justify-content: space-between;
+        }
+
+        .logo {
+            width: 120px;
+            margin-right: auto;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+
+
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .icon-button .material-icons {
+            font-size: 24px;
+            color: black;
+        }
+        .menu-buttons {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px;
+        }
+        .menu-button {
+            padding: 30px 120px 20px;
+            font-size: 18px;
+            background-color: transparent;
+            border: none;
+            color: black;
+            cursor: pointer;
+            margin: 0 10px;
+            position: relative;
+            text-align: center;
+            outline: none;
+        }
+        .menu-button.active {
+            color: #F7A600;
+        }
+        .menu-button.active::after {
+            content: '';
+            display: block;
+            height: 3px;
+            width: 40px;
+            background-color: #FFD700;
+            margin-top: 5px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+        }
+        .big-button {
+            font-size: 40px;
+            padding: 20px 50px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            width: 200px;
+        }
+        .buy-button {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            margin-left: 40px;
+        }
+        .sell-button {
+            background-color: red;
+            color: black;
+            border: 1px solid black;
+            margin-left: 40px;
+        }
+        .no-records {
+            text-align: center;
+            margin-top: 200px;
+        }
+        .no-records p {
+            font-size: 34px;
+            color: grey;
+        }
+
+
+
+        /* Repeated Card Styling */
+
+        /* Card Styling */
+        .card-container {
+            width: 100%;
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 16px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            margin-bottom: 40px;  /* Space between cards */
+            margin-top: 200px;
+        }
+
+        /* Header section (User info and orders) */
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ffb74d;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .user-info {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .user-info h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .user-info .status {
+            color: green;
+            font-size: 14px;
+        }
+
+        .order-info {
+            text-align: right;
+        }
+
+        .order-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #757575;
+        }
+
+        /* Body section (Pricing, Available and Limit) */
+        .card-body {
+            margin-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .available-limit {
+            font-size: 14px;
+            color: #757575;
+            margin-top: 8px;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .chip {
+            background-color: #f1f1f1;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .chip.orange { color: #ff9800; }
+        .chip.blue { color: #2196f3; }
+        .chip.purple { color: #9c27b0; }
+        .chip.green { color: #4caf50; }
+        .chip.lightblue { color: #03a9f4; }
+
+        /* Button Section */
+        .card-footer {
+            text-align: right;
+            margin-top: 16px;
+        }
+
+        .sell-btn {
+            padding: 12px 30px;
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .sell-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Add some space between each card */
+        .card-container + .card-container {
+            margin-top: 30px;
+        }
+
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="app-bar">
+        <img src="assets/logo.png" alt="Logo" class="logo"
+            onerror="this.style.display='none'; document.getElementById('error-icon').style.display='inline';">
+        <i id="error-icon" class="material-icons" style="display: none;">error</i>
+
+        <div class="actions">
+            <button class="icon-button" onclick="handleSearch()">
+                <span class="material-icons">search</span>
+            </button>
+            <button class="icon-button" onclick="navigateToMenu()">
+                <span class="material-icons">menu</span>
+            </button>
+        </div>
+    </header>
+    
+    <div class="main-container">
+        <div class="menu-buttons">
+            <button class="menu-button" onclick="navigateToPage('OneClickToBuy')">OneClickToBuy</button>
+            <button class="menu-button active" onclick="navigateToPage('P2P')">P2P</button>
+            <button class="menu-button" onclick="navigateToPage('Block')">Block</button>
+            <button class="menu-button" onclick="navigateToPage('Fiat')">Fiat</button>
+            <button class="menu-button" onclick="navigateToPage('Auto-Invest')">Auto-Invest</button>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="big-button buy-button" onclick="navigateToPage('Buy')">Buy</button>
+            <button class="big-button sell-button" onclick="navigateToPage('Sell')">Sell</button>
+        </div>
+        
+        <!-- Replicated Cards -->
+    <div id="cards-container"></div>
+
+    </div>
+
+    <script>
+        function searchAction() {
+            alert('Search button clicked');
+        }
+        
+        function navigateToMenu() {
+            window.location.href = 'menu.html'; // Redirect to the menu page
+        }
+
+        function navigateToPage(page) {
+            if (page === 'OneClickToBuy') {
+                window.location.href = 'oneclickBuy_Buy.html';
+            } else if (page === 'P2P') {
+                window.location.href = 'p2pBuy.html';
+            } else if (page === 'Block') {
+                window.location.href = 'block.html';
+            } else if (page === 'Fiat') {
+                window.location.href = 'fiat.html';
+            } else if (page === 'Auto-Invest') {
+                window.location.href = '/bot';
+            } else if (page === 'Buy') {
+                window.location.href = 'p2pBuy.html';
+            } else if (page === 'Sell') {
+                window.location.href = 'p2pBuy.html';
+            }
+            console.log(`${page} button clicked`);
+        }
+
+        // Function to generate a single card
+        function generateCard() {
+            return `
+                <div class="card-container">
+                    <div class="card-header">
+                        <div class="avatar">S</div>
+                        <div class="user-info">
+                            <h3>Salman221</h3>
+                            <p class="status">Online</p>
+                        </div>
+                        <div class="order-info">
+                            <p>982 Order(s)</p>
+                            <p>99%</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="price">PKR 278.86</p>
+                        <p class="available-limit">Available 18,279.1265 USDT</p>
+                        <p class="available-limit">Limit 30,000.00-276,092.87 PKR</p>
+                    </div>
+                    <div class="payment-methods">
+                        <div class="chip orange">Jazzcash</div>
+                        <div class="chip blue">Nayapay</div>
+                        <div class="chip purple">Faysal Bank</div>
+                        <div class="chip green">Bank Transfer</div>
+                    </div>
+                    <div class="payment-methods">
+                        <div class="chip lightblue">Easypaisa-PK only</div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="sell-btn" onclick="sell()">Sell</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to add multiple cards to the page
+        function addCards() {
+            const container = document.getElementById('cards-container');
+            for (let i = 0; i < 8; i++) {
+                container.innerHTML += generateCard();
+            }
+        }
+
+        // Add cards when the page loads
+        window.onload = addCards;
+
+        // Sell button click handler
+        function sell() {
+            console.log('Sell button pressed');
+        }
+
+
+
+        
+    </script>
+</body>
+</html>

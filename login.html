@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Screen</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header-content h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+            margin: 0;
+        }
+
+        .signup-button {
+            background-color: transparent;
+            border: none;
+            color: #F7A600;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .divider {
+            border-top: 2px solid #e0e0e0;
+            margin: 20px 0;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #F7A600;
+            font-size: 18px;
+            text-decoration: underline;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .tab-button.active {
+            text-decoration: none;
+            color: black;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .toggle-password {
+            color: #F7A600;
+            cursor: pointer;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .forgot-password {
+            background: none;
+            border: none;
+            color: #F7A600;
+            cursor: pointer;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .login-button {
+            background-color: #F7A600;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .alternative-login {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-button {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        .subaccount-button {
+            background: transparent;
+            border: none;
+            color: #F7A600;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-content h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>Welcome to CoinbankApp</h1>
+            </div>
+            <button class="signup-button" onclick="window.location.href='signup.html'">Sign Up</button>
+        </header>
+
+        <div class="divider"></div>
+
+        <div class="button-group">
+            <button class="tab-button active" onclick="setActiveTab('email')">Email</button>
+            <button class="tab-button" onclick="setActiveTab('mobile')">Mobile</button>
+        </div>
+
+        <form class="login-form">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password" required>
+            <span class="toggle-password" onclick="togglePassword()">Show</span>
+
+            <button type="button" class="forgot-password" onclick="forgotPassword()">Forgot Password?</button>
+
+            <button type="submit" class="login-button" onclick="window.location.href='Index.html'">Login</button>
+        </form>
+
+        <div class="alternative-login">
+            <p>or login with</p>
+            
+        <div class="social-buttons">
+            <button class="social-button"><i class="fab fa-google"></i> Google</button>
+            <button class="social-button"><i class="fab fa-apple"></i> Apple</button>
+        </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <button class="subaccount-button" onclick="window.location.href='signup.html'">Login with Subaccount</button>
+    </div>
+
+    <script>
+        function setActiveTab(tab) {
+            const emailButton = document.querySelector('.tab-button.active');
+            const mobileButton = document.querySelector('.tab-button:not(.active)');
+
+            if (tab === 'email') {
+                emailButton.classList.add('active');
+                mobileButton.classList.remove('active');
+            } else {
+                mobileButton.classList.add('active');
+                emailButton.classList.remove('active');
+            }
+        }
+
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggleText = document.querySelector('.toggle-password');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleText.textContent = 'Hide';
+            } else {
+                passwordField.type = 'password';
+                toggleText.textContent = 'Show';
+            }
+        }
+
+        function forgotPassword() {
+            alert('Forgot Password functionality goes here.');
+        }
+
+        function googleLogin() {
+            alert('Google login functionality goes here.');
+        }
+
+        function appleLogin() {
+            alert('Apple login functionality goes here.');
+        }
+    </script>
+</body>
+</html>

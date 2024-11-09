@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Menu Screen</title>
+
+    <style>
+        * {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #17181E;
+    color: white;
+}
+
+.menu-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.menu-bar {
+    width: 100%;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.button {
+    padding: 20px 40px;
+    font-size: 24px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login {
+    background: transparent;
+    color: white;
+}
+
+.signup {
+    background-color: orange;
+    color: white;
+}
+
+.menu-button {
+    background-color: transparent;
+    color: white;
+    padding: 20px 30px;
+    font-size: 22px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.menu-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+hr {
+    width: 80%;
+    border: 2px solid grey;
+    margin: 40px 0;
+}
+
+.app-buttons {
+    margin-top: 50px;
+}
+
+.app {
+    background-color: transparent;
+    color: white;
+    padding: 20px 30px;
+    font-size: 22px;
+    margin: 10px;
+}
+
+.language {
+    background-color: transparent;
+    color: white;
+    padding: 20px 30px;
+    font-size: 22px;
+    margin: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="menu-screen">
+        <div class="menu-bar">
+            <div class="button-container">
+                <button class="button login" onclick="navigateTo('login')">Log in</button>
+                <button class="button signup" onclick="navigateTo('signup')">Sign Up</button>
+            </div>
+            <hr>
+            <div class="menu-items">
+                <button class="menu-button" onclick="navigateTo('oneclickBuyBuy')">Buy Crypto</button>
+                <button class="menu-button" onclick="navigateTo('markets')">Markets</button>
+                <button class="menu-button" onclick="navigateTo('otcconvert')">Trade</button>
+                <button class="menu-button" onclick="navigateTo('loans')">Derivatives</button>
+                <button class="menu-button" onclick="navigateTo('bot')">Tools</button>
+                <button class="menu-button" onclick="navigateTo('coinbankearn')">Finance</button>
+                <button class="menu-button" onclick="navigateTo('rewards')">My Rewards</button>
+                <button class="menu-button" onclick="navigateTo('helpcenter')">Help Center</button>
+            </div>
+            <div class="app-buttons">
+                <button class="button app" onclick="navigateTo('profile')">App</button>
+                <button class="button language" onclick="printMessage('English button pressed')">English</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+    console.log(`Navigating to ${page}`);
+    // Replace the current page with the appropriate URL
+    switch (page) {
+        case 'login':
+            window.location.href = 'login.html'; // Navigate to the login page
+            break;
+        case 'signup':
+            window.location.href = 'signup.html'; // Navigate to the signup page
+            break;
+        case 'oneclickBuyBuy':
+            window.location.href = 'OneclickBuy_Buy.html'; // Navigate to the Buy Crypto page
+            break;
+        case 'markets':
+            window.location.href = 'markets.html'; // Navigate to the Markets page
+            break;
+        case 'otcconvert':
+            window.location.href = 'otcTrade.html'; // Navigate to the Trade page
+            break;
+        case 'loans':
+            window.location.href = 'derivatives.html'; // Navigate to the Derivatives page
+            break;
+        case 'bot':
+            window.location.href = 'bot.html'; // Navigate to the Tools page
+            break;
+        case 'coinbankearn':
+            window.location.href = 'coinbankEarn.html'; // Navigate to the Finance page
+            break;
+        case 'rewards':
+            window.location.href = 'rewards.html'; // Navigate to the My Rewards page
+            break;
+        case 'helpcenter':
+            window.location.href = 'helpcenter.html'; // Navigate to the Help Center page
+            break;
+        case 'profile':
+            window.location.href = 'profile.html'; // Navigate to the Profile page
+            break;
+        default:
+            console.log('Unknown page');
+            break;
+    }
+}
+
+function printMessage(message) {
+    console.log(message);
+}
+
+
+
+    </script>
+</body>
+</html>

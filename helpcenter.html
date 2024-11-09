@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha384-DyZ88mC6Up2uqS0ImDB4c0hfO6vGquShj8PbWofj50YZPcKGk9W2iEsv9n5JxtiY" crossorigin="anonymous">
+
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-bar {
+            display: flex;
+            align-items: center;
+            background-color: #9e9e9e;
+            padding: 10px 20px;
+            color: black;
+        }
+
+        .logo {
+            width: 120px;
+            margin-right: auto;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .icon-button .material-icons {
+            font-size: 24px;
+            color: black;
+        }
+
+        /* General styling for container */
+        .container {
+            padding: 20px;
+            background-color: #3D2B2B;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 90%;
+            margin: 50px;
+        }
+
+        /* Title and subtitle styling */
+        .title {
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin: 10px 0;
+        }
+
+        /* Search bar styling */
+        .search-bar {
+            width: 80%;
+            max-width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+
+        /* Tab container styling */
+        .tab-container {
+            display: inline-flex;
+            justify-content: center;
+            margin-top: 20px;
+
+        }
+
+        .tab-item {
+            color: white;
+            cursor: pointer;
+            padding: 15%;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 600px) {
+            .title {
+                font-size: 1.2rem;
+            }
+
+            .subtitle {
+                font-size: 2rem;
+            }
+        }
+
+        /* General container styling */
+        .self-service {
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Title styling */
+        .self-service h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Grid container styling */
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Individual service item styling */
+        .service-item {
+            display: flex;
+            align-items: center;
+            background-color: #1a1a1a;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            width: 200px;
+            height: 60px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .service-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Icon styling */
+        .icon {
+            font-size: 28px;
+            margin-right: 12px;
+        }
+
+        /* Title styling */
+        .service-title {
+            font-size: 16px;
+            font-weight: 400;
+            flex-grow: 1;
+        }
+
+        /* Topics Section styling */
+        .topics-section {
+            padding: 20px;
+            margin-left: 50px;
+            margin-right: 80px;
+        }
+
+        .topics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topics-header h2 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .view-all-button {
+            color: grey;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Grid layout for Topic Containers */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-items: center;
+            align-items: start;
+        }
+
+        .topic-container {
+            background-color: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            /* Increased max-width for wider items */
+            box-sizing: border-box;
+        }
+
+        .topic-container h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Expandable Topic Item styling */
+        .expandable-topic {
+            margin-top: 10px;
+        }
+
+        .expandable-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
+            color: black;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            text-align: left;
+        }
+
+        .expandable-content {
+            display: none;
+            padding: 10px 0;
+            color: grey;
+            font-size: 14px;
+        }
+
+        .arrow {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .arrow.rotate {
+            transform: rotate(180deg);
+        }
+
+        /* Center alignment for the second row */
+        .topics-grid> :nth-child(4),
+        .topics-grid> :nth-child(5) {
+            justify-self: center;
+            /* Remove grid-column: span to keep them inline */
+            margin-left: 80%;
+        }
+
+        /* Centering the container */
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+        .custom-container {
+            background-color: #EBEFFF;
+            padding: 20px;
+            max-width: 1100px;
+            width: 100%;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        /* Logo styling */
+        .custom-logo {
+            display: block;
+            height: 50px;
+            width: auto;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            filter: grayscale(100%) brightness(0);
+        }
+
+        /* Custom social icons styling */
+        .custom-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .custom-social-icons svg {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            fill: currentColor;
+        }
+
+        .facebook {
+            color: #4267B2;
+        }
+
+        .twitter {
+            color: #1DA1F2;
+        }
+
+        .youtube {
+            color: #FF0000;
+        }
+
+        .instagram {
+            color: #C13584;
+        }
+
+        .linkedin {
+            color: #0077B5;
+        }
+
+        .tiktok {
+            color: #000000;
+        }
+
+        /* Section title styling */
+        .custom-section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        /* Expandable sections grid styling */
+        .custom-expandable-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            text-align: left;
+        }
+
+        .custom-expandable {
+            border: 1px solid #ddd;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            position: relative;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Arrow styling */
+        .arrow {
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        /* Expandable content styling */
+        .custom-expandable-content {
+            display: none;
+            padding: 10px 0;
+            font-weight: normal;
+            color: #555;
+        }
+
+        .custom-expandable.active .custom-expandable-content {
+            display: block;
+        }
+
+        .custom-expandable.active .arrow {
+            transform: rotate(180deg);
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .topics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .grid-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-item {
+                width: 90%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="app-bar">
+        <img src="assets/logo.png" alt="Logo" class="logo"
+            onerror="this.style.display='none'; document.getElementById('error-icon').style.display='inline';">
+        <i id="error-icon" class="material-icons" style="display: none;">error</i>
+
+        <div class="actions">
+            <button class="icon-button" onclick="handleSearch()">
+                <span class="material-icons">search</span>
+            </button>
+            <button class="icon-button" onclick="navigateToMenu()">
+                <span class="material-icons">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <p class="title">Coinbank Help Center</p>
+        <h2 class="subtitle">Hello, how can we help?</h2>
+
+        <!-- Search bar container -->
+        <div class="search-bar">
+            <input type="text" placeholder="Ask anything" class="search-input">
+        </div>
+
+        <!-- Tabs for Verification, Block, Trade, Bank account -->
+        <div class="tab-container">
+            <div class="tab-item">Verification</div>
+            <div class="tab-item">Block</div>
+            <div class="tab-item">Trade</div>
+            <div class="tab-item">Bank account</div>
+        </div>
+    </div>
+
+    <div class="self-service">
+        <h2>Self Service</h2>
+        <div class="grid-container">
+            <div class="service-item">
+
+                <span class="service-title">Verify Account</span>
+                <i class="icon material-icons">verified</i>
+            </div>
+            <div class="service-item">
+
+                <span class="service-title">Change Email</span>
+                <i class="icon material-icons">email</i>
+            </div>
+            <div class="service-item">
+
+                <span class="service-title">Chain Status</span>
+                <i class="icon material-icons">sync</i>
+            </div>
+            <div class="service-item">
+
+                <span class="service-title">Change Phone</span>
+                <i class="icon material-icons">phone</i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Material Icons for icons to display -->
+
+
+    <div class="topics-section">
+        <div class="topics-header">
+            <h2>Topics</h2>
+            <button class="view-all-button">View all</button>
+        </div>
+
+        <div class="topics-grid">
+            <!-- Topic Container 1 -->
+            <div class="topic-container">
+                <h3>Account Management</h3>
+                <hr>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Account Management <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Details about managing your account.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Account Settings <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Information on setting up your account.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Subaccount <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Guidelines for creating and managing subaccounts.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Topic Container 2 -->
+            <div class="topic-container">
+                <h3>Security</h3>
+                <hr>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Two-Factor Authentication <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        How to set up two-factor authentication.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Password Management <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Tips for secure password management.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Login Alerts <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Set up login alerts for your account.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Topic Container 3 -->
+            <div class="topic-container">
+                <h3>Security</h3>
+                <hr>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Two-Factor Authentication <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        How to set up two-factor authentication.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Password Management <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Tips for secure password management.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Login Alerts <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Set up login alerts for your account.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Topic Container 4 -->
+            <div class="topic-container">
+                <h3>Security</h3>
+                <hr>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Two-Factor Authentication <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        How to set up two-factor authentication.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Password Management <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Tips for secure password management.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Login Alerts <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Set up login alerts for your account.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Topic Container 5 -->
+            <div class="topic-container">
+                <h3>Security</h3>
+                <hr>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Two-Factor Authentication <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        How to set up two-factor authentication.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Password Management <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Tips for secure password management.
+                    </div>
+                </div>
+                <div class="expandable-topic">
+                    <button class="expandable-title" onclick="toggleExpand(this)">
+                        Login Alerts <span class="arrow">▼</span>
+                    </button>
+                    <div class="expandable-content">
+                        Set up login alerts for your account.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="centered-container">
+        <div class="custom-container">
+            <img src="assets/logo.png" alt="Logo" class="custom-logo">
+
+            <div class="custom-social-icons">
+                <!-- Facebook SVG -->
+                <svg class="facebook" onclick="window.open('https://facebook.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M22.675 0h-21.35C.586 0 0 .586 0 1.325v21.351C0 23.415.586 24 1.325 24H12V14.709h-3.293v-3.709H12V8.151c0-3.281 2.013-5.07 4.951-5.07 1.409 0 2.62.104 2.971.151v3.447H16.92c-1.395 0-1.664.665-1.664 1.639v2.146h3.328l-.436 3.709H15.256V24h6.419c.739 0 1.325-.586 1.325-1.324V1.325C24 .586 23.415 0 22.675 0z" />
+                </svg>
+
+                <!-- Twitter SVG -->
+                <svg class="twitter" onclick="window.open('https://twitter.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.194-.897-.957-2.178-1.555-3.594-1.555-2.72 0-4.924 2.204-4.924 4.922 0 .386.043.763.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.423.724-.666 1.561-.666 2.475 0 1.708.87 3.216 2.188 4.099-.807-.026-1.566-.248-2.229-.616v.061c0 2.386 1.698 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.03-.928-.088.626 1.956 2.444 3.379 4.599 3.419-1.68 1.318-3.808 2.104-6.115 2.104-.397 0-.788-.023-1.175-.067 2.179 1.397 4.768 2.212 7.557 2.212 9.054 0 14.004-7.503 14.004-14.003 0-.213-.005-.425-.014-.636.964-.694 1.8-1.56 2.462-2.548z" />
+                </svg>
+
+                <!-- YouTube SVG -->
+                <svg class="youtube" onclick="window.open('https://youtube.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M19.615 3.184A4.644 4.644 0 0016.388 2H7.613a4.645 4.645 0 00-3.227 1.184 4.623 4.623 0 00-1.194 3.157v10.313c0 1.187.43 2.311 1.194 3.158A4.645 4.645 0 007.613 22h8.775a4.645 4.645 0 003.227-1.184 4.623 4.623 0 001.195-3.158V6.34c0-1.187-.43-2.311-1.194-3.157zM10.66 16.203v-8.47l6.818 4.234-6.818 4.236z" />
+                </svg>
+
+                <!-- Instagram SVG -->
+                <svg class="instagram" onclick="window.open('https://instagram.com', '_blank')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.326 3.608 1.301.975.975 1.238 2.242 1.301 3.608.057 1.266.069 1.646.069 4.85s-.012 3.584-.07 4.85c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.238-3.608 1.301-1.266.057-1.646.069-4.85.069s-3.584-.012-4.85-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.238-2.242-1.301-3.608-.057-1.266-.069-1.646-.069-4.85s.012-3.584.07-4.85c.062-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.238 3.608-1.301 1.266-.057 1.646-.069 4.85-.069m0-2.163C8.741 0 8.332.015 7.053.073 5.77.132 4.522.396 3.498 1.42 2.474 2.444 2.209 3.692 2.15 4.975.091 8.333.073 8.742.073 12s.018 3.667.077 5.948c.059 1.283.324 2.531 1.348 3.554.975.975 2.222 1.238 3.505 1.297 1.279.059 1.688.077 5.947.077s3.667-.018 5.948-.077c1.283-.059 2.531-.324 3.554-1.348.975-.975 1.238-2.222 1.297-3.505.059-1.279.077-1.688.077-5.947s-.018-3.667-.077-5.948c-.059-1.283-.324-2.531-1.348-3.554C20.478.396 19.231.132 17.948.073 16.667.014 16.258 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 100-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-10.845a1.44 1.44 0 100 2.88 1.44 1.44 0 100-2.88z"/>
+                  </svg>
+                  
+
+                <!-- LinkedIn SVG -->
+                <svg class="linkedin" onclick="window.open('https://linkedin.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M22.23 0H1.77C.792 0 0 .775 0 1.729v20.543C0 23.225.792 24 1.77 24h20.46c.978 0 1.77-.775 1.77-1.729V1.729C24 .775 23.208 0 22.23 0zM7.12 20.452H3.564V9h3.556v11.452zM5.342 7.444c-1.141 0-2.067-.926-2.067-2.067s.926-2.067 2.067-2.067a2.068 2.068 0 012.067 2.067c0 1.141-.926 2.067-2.067 2.067zM20.452 20.452h-3.556v-5.899c0-1.408-.025-3.223-1.964-3.223-1.964 0-2.266 1.535-2.266 3.121v6.001H9.11V9h3.414v1.561h.049c.476-.898 1.635-1.841 3.366-1.841 3.6 0 4.27 2.368 4.27 5.451v6.281z" />
+                </svg>
+
+                <!-- TikTok SVG -->
+                <svg class="tiktok" onclick="window.open('https://tiktok.com', '_blank')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M9.931 11.522v4.061a2.627 2.627 0 11-1.523-2.375V8.036a4.8 4.8 0 105.003 4.79c.027-.278.04-.56.04-.847V8.683a7.997 7.997 0 01-1.516-.818v4.33a2.631 2.631 0 11-1.63-2.456v6.776A4.8 4.8 0 1016.16 1.547C15.191.857 13.98.5 12.545.5c-.131 0-.26.005-.389.014V17.96a2.631 2.631 0 11-1.523-2.373V11.19z"/>
+                  </svg>
+                  
+            </div>
+
+            <p class="custom-section-title">More Information</p>
+
+            <div class="custom-expandable-grid">
+                <div class="custom-expandable" onclick="toggleSection(this)">
+                    <span>About Us</span>
+                    <span class="arrow">▼</span>
+                    <div class="custom-expandable-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+
+                <div class="custom-expandable" onclick="toggleSection(this)">
+                    <span>Careers</span>
+                    <span class="arrow">▼</span>
+                    <div class="custom-expandable-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+
+                <div class="custom-expandable" onclick="toggleSection(this)">
+                    <span>Privacy Policy</span>
+                    <span class="arrow">▼</span>
+                    <div class="custom-expandable-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in
+                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    </div>
+                </div>
+
+                <div class="custom-expandable" onclick="toggleSection(this)">
+                    <span>Terms of Service</span>
+                    <span class="arrow">▼</span>
+                    <div class="custom-expandable-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        function toggleSection(element) {
+            element.classList.toggle('active');
+        }
+
+        function handleSearch() {
+            // Define the search functionality here
+            console.log("Search button clicked");
+        }
+
+        function navigateToMenu() {
+            // Redirect to the menu page
+            window.location.href = 'menu.html'; // Change this to your actual menu page path
+        }
+        function toggleExpand(element) {
+            const content = element.nextElementSibling;
+            const arrow = element.querySelector(".arrow");
+
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                arrow.classList.remove("rotate");
+            } else {
+                content.style.display = "block";
+                arrow.classList.add("rotate");
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

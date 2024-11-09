@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha384-DyZ88mC6Up2uqS0ImDB4c0hfO6vGquShj8PbWofj50YZPcKGk9W2iEsv9n5JxtiY" crossorigin="anonymous">
+    <Title>Fiat Deposit</Title>
+
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        .app-bar {
+            display: flex;
+            align-items: center;
+            background-color: #9e9e9e;
+            padding: 10px 20px;
+            color: black;
+            justify-content: space-between;
+        }
+
+        .logo {
+            width: 120px;
+            margin-right: auto;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+        }
+
+
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .icon-button .material-icons {
+            font-size: 24px;
+            color: black;
+        }
+
+        .Wadda-Div {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            /* Shadow effect */
+            padding: 20px;
+            /* Added padding for internal spacing */
+            border-radius: 12px;
+            /* Rounded corners */
+            margin-left: auto;
+            /* Center horizontally */
+            margin-right: auto;
+            /* Center horizontally */
+            width: 100%;
+            /* Control width, adjust as needed */
+            max-width: 1500px;
+            /* Optional: restrict max width */
+            background-color: white;
+            /* Background color */
+            background-color: white;
+        }
+
+        .Wadda-Div2 {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            /* Shadow effect */
+            padding: 20px;
+            /* Added padding for internal spacing */
+            border-radius: 12px;
+            /* Rounded corners */
+            margin-top: 50px;
+            margin-left: auto;
+            /* Center horizontally */
+            margin-right: auto;
+            /* Center horizontally */
+            width: 100%;
+            /* Control width, adjust as needed */
+            max-width: 1500px;
+            /* Optional: restrict max width */
+            background-color: white;
+            /* Background color */
+            background-color: white;
+        }
+
+
+
+
+
+        /* Upper Scroll Container Styling */
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px 0;
+        }
+
+        .menu-button {
+            padding: 30px 120px 20px;
+            font-size: 18px;
+            background-color: transparent;
+            border: none;
+            color: black;
+            cursor: pointer;
+            margin: 0 10px;
+            position: relative;
+            text-align: center;
+            outline: none;
+        }
+
+        /* Highlight color for active button */
+        .menu-button.active {
+            color: #F7A600;
+        }
+
+        /* Underline for active button */
+        .menu-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 3px;
+            width: 40px;
+            background-color: #FFD700;
+            /* Yellow color */
+        }
+
+        /* Space after the menu */
+        .spacer {
+            height: 100px;
+        }
+
+
+
+        /* Big Buy Sell */
+        .button-section {
+            margin-top: 100px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 200px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        /* Button Styling */
+        .big-button {
+            flex: 1;
+            padding: 0px 30px;
+            font-size: 40px;
+            color: black;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Button Colors */
+        .buy-button {
+            color: #F7A600;
+        }
+
+        .sell-button {
+            color: black;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 768px) {
+            .button-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .big-button {
+                padding: 20px 40px;
+                font-size: 30px;
+            }
+        }
+
+
+
+
+        /* Spend Recieve cards */
+
+        /* Card Styling */
+        .row {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .big-button {
+            flex-grow: 1;
+            background-color: white;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .card-Recieve {
+            background-color: #f0f0f0;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .card-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left-column {
+            flex: 3;
+            text-align: left;
+        }
+
+        .right-column {
+            flex: 2;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .spacer {
+            height: 50px;
+        }
+
+        .dropdown {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: white;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .payment-method-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            border: 1px solid white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .wallet-image {
+            width: 50px;
+            height: 50px;
+        }
+
+        .amount-input {
+            width: 150px;
+            text-align: center;
+            padding: 10px;
+            border: none;
+            font-size: 18px;
+        }
+
+        .service-status {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 30px;
+        }
+
+        .login-button {
+            display: block;
+            width: 100%;
+            background-color: #fbc02d;
+            color: white;
+            padding: 24px;
+            border: none;
+            font-size: 20px;
+            margin-top: 40px;
+            cursor: pointer;
+        }
+
+        .auto-invest-button {
+            display: block;
+            width: 100%;
+            background-color: transparent;
+            padding: 16px;
+            text-align: center;
+            font-size: 18px;
+            color: blue;
+            border: none;
+            cursor: pointer;
+        }
+
+        .auto-invest-button:hover,
+        .login-button:hover {
+            opacity: 0.8;
+        }
+
+
+
+
+        /* Depost SSection Styling */
+
+        /* Main container */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Main Title */
+        .main-title {
+            font-size: 40px;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: 22px;
+            color: #606060;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Grid for 4 cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* 4 equal columns */
+            gap: 20px;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        /* Individual card */
+        .card-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 50px 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .icon {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: black;
+            margin-bottom: 50px;
+        }
+
+        .card-subtitle {
+            font-size: 18px;
+            color: #606060;
+        }
+
+        /* Grid for 2 image cards */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 equal columns */
+            gap: 20px;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .image-container {
+            width: 100%;
+        }
+
+        .image-card {
+            width: 100%;
+            height: 400px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 10px;
+        }
+
+
+        /* FAQ STYLING */
+        /* Main section style */
+        .faq-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Main title */
+        .main-title {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            /* Space between title and content */
+        }
+
+        /* Spacer for adding space between elements */
+        .spacer {
+            height: 40px;
+        }
+
+        /* FAQ items container */
+        .faq-items {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Individual FAQ item */
+        .faq-item {
+            margin-bottom: 20px;
+            /* Space between each FAQ item */
+        }
+
+        /* FAQ question text */
+        .faq-question {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        /* View More section */
+        .view-more {
+            font-size: 18px;
+            font-weight: 900;
+            color: #F7A600;
+        }
+
+        .hello{
+            align-items: center;
+            align-self: center;
+        }
+
+
+
+
+        /* About us Styling */
+        .container {
+            padding: 20px;
+            background-color: #3D2B2B;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 200%;
+            margin: 50px;
+        }
+
+
+        /* Centering the container */
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+        .custom-container {
+            margin-top: 20%;
+            background-color: #EBEFFF;
+            padding: 200px;
+            max-width: 2000px;
+            width: 100%;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        /* Logo styling */
+        .custom-logo {
+            display: block;
+            height: 50px;
+            width: auto;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            filter: grayscale(100%) brightness(0);
+        }
+
+        /* Custom social icons styling */
+        .custom-social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .custom-social-icons svg {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            fill: currentColor;
+        }
+
+        .facebook {
+            color: #4267B2;
+        }
+
+        .twitter {
+            color: #1DA1F2;
+        }
+
+        .youtube {
+            color: #FF0000;
+        }
+
+        .instagram {
+            color: #C13584;
+        }
+
+        .linkedin {
+            color: #0077B5;
+        }
+
+        .tiktok {
+            color: #000000;
+        }
+
+        /* Section title styling */
+        .custom-section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        /* Expandable sections grid styling */
+        .custom-expandable-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            text-align: left;
+        }
+
+        .custom-expandable {
+            border: 1px solid #ddd;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            position: relative;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Arrow styling */
+        .arrow {
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        /* Expandable content styling */
+        .custom-expandable-content {
+            display: none;
+            padding: 10px 0;
+            font-weight: normal;
+            color: #555;
+        }
+
+        .custom-expandable.active .custom-expandable-content {
+            display: block;
+        }
+
+        .custom-expandable.active .arrow {
+            transform: rotate(180deg);
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .topics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .grid-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .service-item {
+                width: 90%;
+                max-width: 300px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header class="app-bar">
+        <img src="assets/logo.png" alt="Logo" class="logo"
+            onerror="this.style.display='none'; document.getElementById('error-icon').style.display='inline';">
+        <i id="error-icon" class="material-icons" style="display: none;">error</i>
+
+        <div class="actions">
+            <button class="icon-button" onclick="handleSearch()">
+                <span class="material-icons">search</span>
+            </button>
+            <button class="icon-button" onclick="navigateToMenu()">
+                <span class="material-icons">menu</span>
+            </button>
+        </div>
+    </header>
+
+
+    <!-- Scrollable Menu Container -->
+    <div class="scroll-container">
+        <button class="menu-button " onclick="navigateTo('OneClickToBuy', this)">OneClickToBuy</button>
+        <button class="menu-button" onclick="navigateTo('P2P', this)">P2P</button>
+        <button class="menu-button" onclick="navigateTo('Block', this)">Block</button>
+        <button class="menu-button active" onclick="navigateTo('Fiat', this)">Fiat</button>
+        <button class="menu-button" onclick="navigateTo('Auto-Invest', this)">Auto-Invest</button>
+    </div>
+
+    <!-- Spacer for space below the menu -->
+    <div class="spacer"></div>
+
+
+    <div class="Wadda-Div">
+        <div class="row">
+            <div class="button-container">
+                <button class="big-button">Fiat Deposit</button>
+                <button class="big-button">Fiat Withdrawal</button>
+            </div>
+
+            <div class="card-Recieve">
+                <div class="card-content">
+                    <div class="left-column">
+                        <h3>Amount</h3>
+                        <div class="spacer"></div>
+                    </div>
+                    <div class="right-column">
+                        <select id="dropdown" class="dropdown" onchange="handleDropdownChange()">
+                            <option value="Option 1">
+                                <img src="assets/icons/usd.png" alt="USD" class="icon"> USDT
+                            </option>
+                            <option value="Option 2">
+                                <img src="assets/icons/rsimage.png" alt="Option 2" class="icon"> Option 2
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hello"></div>
+            <h2>Payment Methods</h2>
+            <div class="payment-method-container">
+                <img src="assets/walletInput.png" alt="Wallet" class="wallet-image">
+                <input type="text" placeholder="Enter amount" class="amount-input">
+            </div>
+
+            <p class="service-status">Service is currently not available.</p>
+
+            <button class="login-button" onclick="handleLogin()">Login</button>
+            <button class="auto-invest-button" onclick="handleAutoInvest()">Auto-Invest</button>
+        </div>
+
+    </div>
+
+
+
+    <div class="Wadda-Div2">
+
+        <!-- Deposit Section -->
+        <div class="main-container">
+            <div class="section">
+                <h1 class="main-title">Deposit Local fiat<br>Currencies to Buy Crypto</h1>
+                <p class="subtitle">Convert cash into crypto. Deposit over 65+<br>fiat currencies to get started with
+                    crypto trading.</p>
+
+                <div class="card-grid">
+                    <div class="card-container">
+                        <div class="card">
+                            <img src="assets/wallet.png" alt="Wallet Icon" class="icon">
+                            <h2 class="card-title">Transact Seamlessly<br>Through Bank Transfers</h2>
+                            <p class="card-subtitle">Transact effortlessly with an extensive<br>selection of banks and
+                                payment<br>networks, including SEPA, FPS, VISA<br>and Mastercard</p>
+                        </div>
+                    </div>
+
+                    <div class="card-container">
+                        <div class="card">
+                            <img src="assets/lock.png" alt="Lock Icon" class="icon">
+                            <h2 class="card-title">Swift Transactions With<br>Robust Security</h2>
+                            <p class="card-subtitle">Experience rapid transactions and rest<br>easy knowing your funds
+                                are secure</p>
+                        </div>
+                    </div>
+
+                    <div class="card-container">
+                        <div class="card">
+                            <img src="assets/zeroFees.png" alt="Zero Fees Icon" class="icon">
+                            <h2 class="card-title">Zero Fees & Competitive<br>Rates</h2>
+                            <p class="card-subtitle">Maximize your investment with zero<br>fees and competitive currency
+                                rates.</p>
+                        </div>
+                    </div>
+
+                    <div class="card-container">
+                        <div class="card">
+                            <img src="assets/tailored.png" alt="Tailored Icon" class="icon">
+                            <h2 class="card-title">Tailored for Large<br>Transactions</h2>
+                            <p class="card-subtitle">Our platform is optimized to handle<br>and support all transaction
+                                sizes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h1 class="main-title">Leading Crypto Trading<br>Platform</h1>
+
+                <div class="image-grid">
+                    <div class="image-container">
+                        <div class="image-card" style="background-image: url('assets/leadingCrypto.png');">
+                            <!-- Optional: Additional content here -->
+                        </div>
+                    </div>
+
+                    <div class="image-container">
+                        <div class="image-card" style="background-image: url('assets/millions.png');">
+                            <!-- Optional: Additional content here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- FAQ Section -->
+
+        <div class="faq-section">
+            <!-- Main Title -->
+            <h1 class="main-title">FAQs</h1>
+
+            <!-- Space between the title and the content -->
+            <div class="spacer"></div>
+
+            <!-- FAQ Items -->
+            <div class="faq-items">
+                <div class="faq-item">
+                    <p class="faq-question">How to Buy Coins with Your Credit/Debit Card on Coinbank</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">How to Buy Coins with Your Credit/Debit Card on Coinbank</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">How to Buy Coins with Your Credit/Debit Card on Coinbank</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">How to Buy Coins with Your Credit/Debit Card on Coinbank</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">How to Buy Coins with Your Credit/Debit Card on Coinbank</p>
+                </div>
+            </div>
+
+            <!-- View More Section -->
+            <div class="spacer"></div>
+            <p class="view-more">View More</p>
+        </div>
+
+    </div>
+
+    <!-- About us Sectio -->
+    <div class="centered-container">
+        <div class="custom-container">
+            <img src="assets/logo.png" alt="Logo" class="custom-logo">
+
+            <div class="custom-social-icons">
+                <!-- Facebook SVG -->
+                <svg class="facebook" onclick="window.open('https://facebook.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M22.675 0h-21.35C.586 0 0 .586 0 1.325v21.351C0 23.415.586 24 1.325 24H12V14.709h-3.293v-3.709H12V8.151c0-3.281 2.013-5.07 4.951-5.07 1.409 0 2.62.104 2.971.151v3.447H16.92c-1.395 0-1.664.665-1.664 1.639v2.146h3.328l-.436 3.709H15.256V24h6.419c.739 0 1.325-.586 1.325-1.324V1.325C24 .586 23.415 0 22.675 0z" />
+                </svg>
+
+                <!-- Twitter SVG -->
+                <svg class="twitter" onclick="window.open('https://twitter.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.194-.897-.957-2.178-1.555-3.594-1.555-2.72 0-4.924 2.204-4.924 4.922 0 .386.043.763.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.423.724-.666 1.561-.666 2.475 0 1.708.87 3.216 2.188 4.099-.807-.026-1.566-.248-2.229-.616v.061c0 2.386 1.698 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.03-.928-.088.626 1.956 2.444 3.379 4.599 3.419-1.68 1.318-3.808 2.104-6.115 2.104-.397 0-.788-.023-1.175-.067 2.179 1.397 4.768 2.212 7.557 2.212 9.054 0 14.004-7.503 14.004-14.003 0-.213-.005-.425-.014-.636.964-.694 1.8-1.56 2.462-2.548z" />
+                </svg>
+
+                <!-- YouTube SVG -->
+                <svg class="youtube" onclick="window.open('https://youtube.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M19.615 3.184A4.644 4.644 0 0016.388 2H7.613a4.645 4.645 0 00-3.227 1.184 4.623 4.623 0 00-1.194 3.157v10.313c0 1.187.43 2.311 1.194 3.158A4.645 4.645 0 007.613 22h8.775a4.645 4.645 0 003.227-1.184 4.623 4.623 0 001.195-3.158V6.34c0-1.187-.43-2.311-1.194-3.157zM10.66 16.203v-8.47l6.818 4.234-6.818 4.236z" />
+                </svg>
+
+                <!-- Instagram SVG -->
+                <svg class="instagram" onclick="window.open('https://instagram.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.326 3.608 1.301.975.975 1.238 2.242 1.301 3.608.057 1.266.069 1.646.069 4.85s-.012 3.584-.07 4.85c-.062 1.366-.326 2.633-1.301 3.608-.975.975-2.242 1.238-3.608 1.301-1.266.057-1.646.069-4.85.069s-3.584-.012-4.85-.07c-1.366-.062-2.633-.326-3.608-1.301-.975-.975-1.238-2.242-1.301-3.608-.057-1.266-.069-1.646-.069-4.85s.012-3.584.07-4.85c.062-1.366.326-2.633 1.301-3.608.975-.975 2.242-1.238 3.608-1.301 1.266-.057 1.646-.069 4.85-.069M12 0C8.741 0 8.332.015 7.053.073 5.77.132 4.522.396 3.498 1.42 2.474 2.444 2.209 3.692 2.15 4.975.091 8.333.073 8.742.073 12s.018 3.667.077 5.948c.059 1.283.324 2.531 1.348 3.554.975.975 2.222 1.238 3.505 1.297 1.279.059 1.688.077 5.947.077s3.667-.018 5.948-.077c1.283-.059 2.531-.324 3.554-1.348.975-.975 1.238-2.222 1.297-3.505.059-1.279.077-1.688.077-5.947s-.018-3.667-.077-5.948c-.059-1.283-.324-2.531-1.348-3.554C20.478.396 19.231.132 17.948.073 16.667.014 16.258 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 100-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zm6.406-10.845a1.44 1.44 0 100 2.88 1.44 1.44 0 100-2.88z" />
+                </svg>
+
+                <!-- LinkedIn SVG -->
+                <svg class="linkedin" onclick="window.open('https://linkedin.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M22.23 0H1.77C.792 0 0 .775 0 1.729v20.543C0 23.225.792 24 1.77 24h20.46c.978 0 1.77-.775 1.77-1.729V1.729C24 .775 23.208 0 22.23 0zM7.12 20.452H3.564V9h3.556v11.452zM5.342 7.444c-1.141 0-2.067-.926-2.067-2.067s.926-2.067 2.067-2.067a2.068 2.068 0 012.067 2.067c0 1.141-.926 2.067-2.067 2.067zM20.452 20.452h-3.556v-5.899c0-1.408-.025-3.223-1.964-3.223-1.964 0-2.266 1.535-2.266 3.121v6.001H9.11V9h3.414v1.561h.049c.476-.898 1.635-1.841 3.366-1.841 3.6 0 4.27 2.368 4.27 5.451v6.281z" />
+                </svg>
+
+                <!-- TikTok SVG -->
+                <svg class="tiktok" onclick="window.open('https://tiktok.com', '_blank')"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M16.16 1.547C15.191.857 13.98.5 12.545.5c-.131 0-.26.005-.389.014V17.96a2.631 2.631 0 11-1.523-2.373V11.19a4.8 4.8 0 105.003 4.79c.027-.278.04-.56.04-.847V8.683a7.997 7.997 0 01-1.516-.818v4.33a2.631 2.631 0 11-1.63-2.456v6.776A4.8 4.8 0 1016.16 1.547z" />
+                </svg>
+            </div>
+
+            <p class="custom-section-title">More Information</p>
+
+            <div class="custom-expandable-grid">
+                <div class="custom-expandable" onclick="toggleSection(this)">
+                    <span>About Us</span>
+                    <span class="arrow">▼</span>
+                    <div class="custom-expandable-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+
+                <div class="custom-expandable" onclick="toggleSection(this)">
+                    <span>Careers</span>
+                    <span class="arrow">▼</span>
+                    <div class="custom-expandable-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    </div>
+                </div>
+
+                <div class="custom-expandable" onclick="toggleSection(this)">
+                    <span>Privacy Policy</span>
+                    <span class="arrow">▼</span>
+                    <div class="custom-expandable-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in
+                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    </div>
+                </div>
+
+                <div class="custom-expandable" onclick="toggleSection(this)">
+                    <span>Terms of Service</span>
+                    <span class="arrow">▼</span>
+                    <div class="custom-expandable-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat
+                            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        function toggleSection(element) {
+            element.classList.toggle('active');
+        }
+
+        function handleSearch() {
+            // Define the search functionality here
+            console.log("Search button clicked");
+        }
+
+        function navigateToMenu() {
+            // Redirect to the menu page
+            window.location.href = 'menu.html'; // Change this to your actual menu page path
+        }
+
+        function navigateTo(page, button) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.menu-button').forEach(btn => btn.classList.remove('active'));
+            // Add active class to the clicked button
+            button.classList.add('active');
+
+            // Handle page redirection based on button text
+            if (page === 'P2P') {
+                window.location.href = 'p2pBuy.html';
+            } else if (page === 'Block') {
+                window.location.href = 'block.html';
+            } else if (page === 'Fiat') {
+                window.location.href = '/fiat';
+            } else if (page === 'Auto-Invest') {
+                window.location.href = '/bot';
+            }
+            // No navigation for 'OneClickToBuy' as per original structure.
+        }
+
+        function toggleDropdown(id) {
+            document.getElementById(id).style.display =
+                document.getElementById(id).style.display === 'block' ? 'none' : 'block';
+        }
+
+        function handleButtonClick(action) {
+            if (action === 'Buy') {
+                // Redirect to the Buy page
+                console.log('Buy button clicked'); // Replace with the URL of the page you want to navigate to
+            } else if (action === 'Sell') {
+                // Redirect to the Sell page
+                window.location.href = 'OneclickBuy_sell.html';  // Replace with the URL of the page you want to navigate to
+            }
+        }
+
+
+        function selectOption(value, dropdownId, selectedOptionId) {
+            const selectedOption = document.getElementById(selectedOptionId);
+            selectedOption.querySelector('span').textContent = value;
+            document.getElementById(dropdownId).style.display = 'none';
+            console.log(`Selected option: ${value}`);
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        function selectOption(value, image) {
+            const button = document.querySelector('.dropdown-button');
+            button.innerHTML = `<img src="${image}" alt="Selected Option" width="24" height="24"> ${value}`;
+            toggleDropdown(); // Close the dropdown after selection
+        }
+
+        function onLoginClick() {
+            console.log('Login button pressed');
+        }
+
+        function onAutoInvestClick() {
+            console.log('Auto-Invest button pressed');
+        }
+
+
+    </script>
+
+</body>
+
+</html>
